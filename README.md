@@ -61,7 +61,7 @@ The high-level architecture is:
   ```
 ---
 ## 3. Configuration Files
-1. Your code references a JSON config file at /home/ubuntu/Shane/config.json containing keys for AWS and personal settings. An example structure might look like this:
+1. The code references a JSON config file `config.json` containing keys for AWS and personal settings. An example structure might look like this:
     ```json
     {
       "aws": {
@@ -82,7 +82,7 @@ Update the path to the config file in redfin_analytics.py if you store it elsewh
     │       └── redfin_analytics.py          <-- The DAG script
     ├── snowflake_redfin_script.sql          <-- Snowflake setup SQL
     ├── ReadMe.md
-    └── config.json (or in your /home/ubuntu/Shane/ directory)
+    └── config.json
   ```
 
 1. `redfin_analytics.py` Contains the Airflow DAG and associated Python functions for extracting, transforming, and loading Redfin data to S3.
