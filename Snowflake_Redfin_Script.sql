@@ -1,11 +1,9 @@
 DROP DATABASE IF EXISTS redfin_database_1;
 CREATE DATABASE redfin_database_1;
--- CREATE WAREHOUSE redfin_warehouse;
 CREATE SCHEMA redfin_schema;
 
 
-// Create Table
-// TRUNCATE TABLE redfin_database_1.redfin_schema.redfin_table;
+-- Create Table
 CREATE OR REPLACE TABLE redfin_database_1.redfin_schema.redfin_table (
 period_begin DATE,
 period_end DATE,
@@ -37,11 +35,9 @@ period_begin_in_months STRING,
 period_end_in_months STRING
 );
 
-
-
-
-// Create file format object
+-- Create file format object
 CREATE SCHEMA file_format_schema;
+
 CREATE OR REPLACE file format redfin_database_1.file_format_schema.format_csv
     type = 'CSV'
     field_delimiter = ','
@@ -49,11 +45,10 @@ CREATE OR REPLACE file format redfin_database_1.file_format_schema.format_csv
     skip_header = 1
     -- error_on_column_count_mismatch = FALSE;
     
-// Create staging schema
+-- Create staging schema
 CREATE SCHEMA external_stage_schema;
 
-// Create staging
--- DROP STAGE redfin_database.external_stage_schema.redfin_ext_stage_yml;
+-- Create staging
 CREATE OR REPLACE STAGE redfin_database_1.external_stage_schema.redfin_ext_stage_yml 
     url=""
     credentials=(aws_key_id=''
@@ -62,11 +57,10 @@ CREATE OR REPLACE STAGE redfin_database_1.external_stage_schema.redfin_ext_stage
 
 list @redfin_database_1.external_stage_schema.redfin_ext_stage_yml PATTERN = '^redfin/redfin_data.*';
 
-// Create schema for snowpipe
--- DROP SCHEMA redfin_database.snowpipe_schema;
+-- Create schema for snowpipe
 CREATE OR REPLACE SCHEMA redfin_database_1.snowpipe_schema;
 
-// Create Pipe
+-- Create Pipe
 CREATE OR REPLACE PIPE redfin_database_1.snowpipe_schema.redfin_snowpipe
 auto_ingest = TRUE
 AS 
@@ -77,12 +71,11 @@ PATTERN = '^redfin/redfin_data.*';
 --get notification channel from below and add it to event notification within s3 properties
 DESC PIPE redfin_database_1.snowpipe_schema.redfin_snowpipe;
 
-/*
-SELECT COUNT(*) FROM redfin_database_1.redfin_schema.redfin_table
-SELECT *
-FROM redfin_database_1.redfin_schema.redfin_table LIMIT 10;
+
+--SELECT COUNT(*) FROM redfin_database_1.redfin_schema.redfin_table
+--SELECT * FROM redfin_database_1.redfin_schema.redfin_table LIMIT 10;
 
 --TRUNCATE TABLE redfin_database_1.redfin_schema.redfin_table
--- DESC TABLE redfin_database.redfin_schema.redfin_table;
+--DESC TABLE redfin_database.redfin_schema.redfin_table;
 
-*/
+
