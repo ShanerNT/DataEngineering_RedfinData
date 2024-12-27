@@ -6,7 +6,7 @@ import boto3
 from airflow.operators.bash import BashOperator
 import json
 
-with open("/home/ubuntu/Shane/config.json") as config_file:
+with open("config.json") as config_file:
     config = json.load(config_file)
 
 
