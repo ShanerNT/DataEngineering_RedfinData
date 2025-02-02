@@ -1,6 +1,6 @@
 # DataEngineering_RedfinData
 
-This project downloads, cleans, and aggregates Redfin real estate data using Airflow, S3, and Snowflake.  
+This project downloads, cleans, and aggregates Redfin real estate data using Python, Airflow, S3, and Snowflake.  
 The high-level architecture is:
 
 1. **Airflow** (running on an Amazon EC2 instance, or any environment you choose) executes a DAG that:
